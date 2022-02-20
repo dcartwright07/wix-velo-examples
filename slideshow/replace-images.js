@@ -1,4 +1,4 @@
-import wixData from 'wix-data';
+import wixData from 'wix-data'
 
 $w.onReady(function () {
   loadSlides('#heroSlideshow')
@@ -10,15 +10,15 @@ $w.onReady(function () {
  * @param slideshowId String
  */
 async function loadSlides(slideshowId) {
-  const slidesData = await getSlideshowDataFromDatabase("HomeSliderImages")
+  const slidesData = await getSlideshowDataFromDatabase('HomeSliderImages')
   const slides = $w(slideshowId).slides // Get all current slides
 
   // For each slide, change the image to its respective image in the dataset list
   slides.forEach((slide, index) => {
-    if(slidesData[index]) {
-		  $w(`#${slide.id}`).background.src = slidesData[index].image;
-    } 
-	})
+    if (slidesData[index]) {
+      $w(`#${slide.id}`).background.src = slidesData[index].image
+    }
+  })
 }
 
 /**
@@ -27,7 +27,10 @@ async function loadSlides(slideshowId) {
  * @param databaseKey String
  */
 function getSlideshowDataFromDatabase(databaseKey) {
-	return wixData.query(databaseKey).find().then(results => {
-		return results.items;
-	})
+  return wixData
+    .query(databaseKey)
+    .find()
+    .then((results) => {
+      return results.items
+    })
 }
