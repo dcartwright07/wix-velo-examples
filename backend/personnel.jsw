@@ -2,6 +2,7 @@ import wixData from 'wix-data'
 
 /**
  * Format a string phone number to look like (000) 000-0000
+ *
  * @param phoneNumberString String
  */
 export function formatPhoneNumber(phoneNumberString) {
@@ -17,6 +18,7 @@ export function formatPhoneNumber(phoneNumberString) {
 
 /** 
  * Returns data from the dataset PersonnelAssociations
+ *
  * @param databaseKey String
  * @param type String
  * @param orderBy String
