@@ -3,15 +3,22 @@ import { fetch } from 'wix-fetch'
 
 // Format phone number to not have hyphens, parenthesis, or spaces
 function formatPhoneNumber(string) {
-  return '+1' + string.replace(/-/g, "").replace(/\(/g, "").replace(/\)/g, "").replace(/ /g, "")
+  return (
+    '+1' +
+    string
+      .replace(/-/g, '')
+      .replace(/\(/g, '')
+      .replace(/\)/g, '')
+      .replace(/ /g, '')
+  )
 }
 
 // Use wix fetch method to make a post request to Glic Healths API
 function postUser(url, data) {
   const options = {
-    method: "POST",
+    method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: data,
   }
@@ -22,7 +29,7 @@ function postUser(url, data) {
 }
 
 // Gather the data needed to be sent to Glic Health
-export async function sendToGlic({firstName, lastName, email, phone}) {
+export async function sendToGlic({ firstName, lastName, email, phone }) {
   const brokerEmail = await getSecret('broker_email')
   const brokerGroupNumber = await getSecret('broker_groupnumber')
 
@@ -38,10 +45,9 @@ export async function sendToGlic({firstName, lastName, email, phone}) {
         lname: lastName,
         email: email,
         phone: formatPhoneNumber(phone),
-      }
-    ]
+      },
+    ],
   }
 
   postUser(testUrl, data)
 }
-
