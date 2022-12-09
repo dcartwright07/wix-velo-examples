@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0 auto;
+        width: 75%;
+      }
+      pre {
+        animation: marquee 200s linear infinite;
+        display: block;
+        font-size: 16px;
+      }
+      @keyframes marquee {
+        0%{transform: translateY(600px); }
+        100%{transform: translateY(-100%); }
+      }
+    </style>
+
+    <script type="text/javascript">
+      function init () {
+        // when a message is received from the page code
+        window.onmessage = (event) => {
+          if (event.data) {
+            console.log("HTML Code Element received a message!");
+            insertCode(event.data);
+          }
+        }
+      }
+
+      // display received message
+      function insertCode(code) {
+        document.getElementById('scrollContent').innerHTML = code;
+        sendReturnMessage("Message from the HTML Component!");
+      }
+
+      // send message to the page code
+      function sendReturnMessage(msg) {
+        window.parent.postMessage(msg);
+      }
+    </script>
+  </head>
+
+  <body onload="init()" style="background-color:white">
+    <pre id="scrollContent">
+      Message will go here
+    </pre>
+  </body>
+</html>
